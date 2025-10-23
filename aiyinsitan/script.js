@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 获取URL参数中的用户名
+    const urlParams = new URLSearchParams(window.location.search);
+    const userName = urlParams.get('name') || ''; // 如果没有传入name参数，默认显示""
+    
+    // 设置用户名到页面中
+    document.getElementById('userName').textContent = userName;
+    
     const startButton = document.querySelector('.start-button');
     const brainWaves = document.querySelector('.brain-waves');
     const transferPath = document.querySelector('.transfer-path');
@@ -135,7 +142,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     document.body.classList.add('fade-out');
                     setTimeout(() => {
-                        window.location.href = 'scene3.html';
+                        const userName = urlParams.get('name') || '';
+                        window.location.href = `scene3.html?name=${encodeURIComponent(userName)}`;
                     }, 1500);
                 }, 1000);
             }, 500);
