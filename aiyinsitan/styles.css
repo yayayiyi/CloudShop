@@ -1,0 +1,421 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0B0B3B, #1A1A4C);
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    transition: opacity 0.5s ease;
+}
+
+/* 淡出动画效果 */
+body.fade-out {
+    opacity: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 0 5%;
+}
+
+/* 左侧爱因斯坦部分 */
+.left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.einstein-img {
+    max-width: 400px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+/* 爱因斯坦脑波效果 */
+.brain-waves {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.brain-wave {
+    position: absolute;
+    border: 2px solid #4a9eff;
+    border-radius: 50%;
+    animation: brainWave 1.4s linear infinite;
+}
+
+.brain-wave:nth-child(1) { animation-delay: 0s; }
+.brain-wave:nth-child(2) { animation-delay: 0.3s; }
+.brain-wave:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes brainWave {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 200px;
+        height: 200px;
+        opacity: 0;
+    }
+}
+
+@keyframes energyFlow {
+    0% {
+        left: 0;
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+        transform: rotate(720deg);
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+        transform: rotate(720deg);
+    }
+}
+
+/* 智慧粒子效果 */
+.wisdom-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #4a9eff, 0 0 20px #4a9eff;
+    opacity: 0;
+    transition: all 2s ease-out;
+}
+
+/* 中间部分 */
+.middle-section {
+    flex: 2;
+    text-align: center;
+    position: relative;
+}
+
+.transfer-path {
+    position: absolute;
+    top: 50%;
+    left: -20%;
+    right: -20%;
+    height: 10px;
+    background: linear-gradient(to right, 
+        transparent 0%,
+        rgba(128, 128, 128, 0.3) 10%,
+        rgba(128, 128, 128, 0.3) 90%,
+        transparent 100%
+    );
+    border-radius: 5px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* 传输通道发光效果 */
+.transfer-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent,
+        #4a9eff,
+        transparent
+    );
+    animation: transferGlow 2s linear infinite;
+    opacity: 0;
+}
+
+@keyframes transferGlow {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* 能量流效果 */
+.energy-flow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.energy-particle {
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    transform-origin: left center;
+    animation: energyFlow 2s linear infinite;
+}
+
+@keyframes energyFlow {
+    0% {
+        left: 0;
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+        transform: rotate(720deg);
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+        transform: rotate(720deg);
+    }
+}
+
+/* 右侧大脑图标 */
+.right-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.brain-icon {
+    width: 200px;
+    height: 200px;
+    background-image: url('images/user-avatar.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: grayscale(100%) opacity(0.5);
+    transition: filter 2s ease;
+}
+
+.brain-icon.activated {
+    filter: grayscale(0) opacity(1);
+    animation: brainPulse 2s infinite;
+}
+
+@keyframes brainPulse {
+    0% { filter: grayscale(0) opacity(1) brightness(1); }
+    50% { filter: grayscale(0) opacity(1) brightness(1.3); }
+    100% { filter: grayscale(0) opacity(1) brightness(1); }
+}
+
+/* 进度条样式 */
+.progress-container {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4a9eff, #4CAF50);
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #fff;
+}
+
+/* 文字样式 */
+.main-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.sub-title {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    color: #a0a0ff;
+}
+
+.warning-text {
+    font-size: 0.9em;
+    color: #ff6b6b;
+    margin-bottom: 40px;
+}
+
+/* 按钮样式 */
+.start-button {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    background: transparent;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.start-button:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+/* 按钮呼吸灯效果 */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+}
+
+.start-button {
+    animation: pulse 2s infinite;
+}
+
+/* 隐藏元素 */
+.hide {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* 右侧头像部分 */
+.avatar-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.user-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: grayscale(100%) opacity(0.5);
+    transition: filter 0.5s ease;
+}
+
+.user-avatar.activated {
+    filter: grayscale(0) opacity(1);
+}
+
+.glitch-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 2;
+    opacity: 0;
+    mix-blend-mode: screen;
+}
+
+.avatar-transition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    opacity: 0;
+    border-radius: 50%;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+    }
+    20% {
+        transform: translate(-10px, 5px);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translate(10px, -5px);
+        opacity: 0.6;
+    }
+    60% {
+        transform: translate(-5px, 10px);
+        opacity: 0.4;
+    }
+    80% {
+        transform: translate(5px, -10px);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+}
+
+.avatar-glitching .glitch-effect {
+    background: linear-gradient(
+        45deg,
+        rgba(74, 158, 255, 0.2),
+        rgba(76, 175, 80, 0.2)
+    );
+    animation: glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.avatar-glitching .user-avatar {
+    animation: avatarShake 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) both;
+}
+
+@keyframes avatarShake {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(5px, 5px); }
+    50% { transform: translate(-5px, -5px); }
+    75% { transform: translate(-5px, 5px); }
+}
+
+/* 数字雨效果 */
+@keyframes digitalRain {
+    0% {
+        opacity: 1;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+}
