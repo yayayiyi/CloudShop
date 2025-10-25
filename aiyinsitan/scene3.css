@@ -163,10 +163,32 @@ body {
     width: 300px;
 }
 
-.einstein-img, .user-img {
+.einstein-img {
     width: 100%;
     height: auto;
     filter: drop-shadow(0 0 20px rgba(0, 150, 255, 0.8));
+    position: relative;
+    z-index: 2;
+}
+
+.user-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(0, 150, 255, 0.8)) !important;
+    position: relative;
+    z-index: 2;
+}
+
+/* 强力覆盖全局样式，保证右侧头像无灰色无透明 */
+.user-img,
+.user-img.user-avatar,
+.user-img.brain-icon {
+    filter: drop-shadow(0 0 20px rgba(0, 150, 255, 0.8)) !important;
+    opacity: 1 !important;
+    -webkit-filter: none !important;
+    -moz-filter: none !important;
+    -ms-filter: none !important;
+    -o-filter: none !important;
 }
 
 /* 脑波效果 */
@@ -177,6 +199,7 @@ body {
     transform: translate(-50%, -50%);
     width: 120%;
     height: 120%;
+    z-index: 1;
 }
 
 .brain-waves.active::before,

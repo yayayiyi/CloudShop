@@ -118,7 +118,7 @@ body.fade-out {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100vw - 500px); /* 根据视口宽度调整宽度 */
+    width: calc(100vw - 700px); /* 减小宽度，使其恰好到达头像边缘 */
     height: 10px;
     background: linear-gradient(to right, 
         transparent 0%,
@@ -127,7 +127,7 @@ body.fade-out {
         transparent 100%
     );
     border-radius: 5px;
-    z-index: 1;
+    z-index: -1;
     overflow: hidden;
 }
 
@@ -197,7 +197,7 @@ body.fade-out {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(-90deg);
-        width: calc(100vh - 200px); /* 调整为视口高度减去上下元素高度 */
+        width: calc(100vh - 400px); /* 减小宽度，使其恰好到达头像边缘 */
         height: 10px;
         background: linear-gradient(to right, 
             transparent 0%,
@@ -206,7 +206,7 @@ body.fade-out {
             transparent 100%
         );
         border-radius: 5px;
-        z-index: 1;
+        z-index: -1;
         overflow: hidden;
     }
 }
@@ -307,6 +307,7 @@ body.fade-out {
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 1;  /* 确保右侧区域在传输线上方 */
 }
 
 .brain-icon {
@@ -318,6 +319,8 @@ body.fade-out {
     background-repeat: no-repeat;
     filter: grayscale(100%) opacity(0.5);
     transition: filter 2s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .brain-icon.activated {
@@ -444,8 +447,9 @@ body.fade-out {
     position: absolute;
     top: 0;
     left: 0;
-    filter: grayscale(100%) opacity(0.5);
+    filter: grayscale(100%) opacity(1);
     transition: filter 0.5s ease;
+    z-index: 1
 }
 
 .user-avatar.activated {
