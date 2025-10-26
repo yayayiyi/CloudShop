@@ -73,25 +73,6 @@ body.fade-out {
     }
 }
 
-@keyframes energyFlow {
-    0% {
-        left: 0;
-        opacity: 0;
-        transform: rotate(0deg);
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-        transform: rotate(720deg);
-    }
-    100% {
-        left: 100%;
-        opacity: 0;
-        transform: rotate(720deg);
-    }
-}
 
 /* 智慧粒子效果 */
 .wisdom-particle {
@@ -147,8 +128,9 @@ body.fade-out {
     }
     
     .left-side {
-        order: 1;
+        order: 3;
         padding-top: 20px;
+        margin-bottom: 80px;
     }
     
     .middle-section {
@@ -156,8 +138,8 @@ body.fade-out {
     }
     
     .right-side {
-        order: 3;
-        margin-bottom: 80px;
+        order: 1;
+        margin-bottom: 30px;
     }
     
     .einstein-img {
@@ -189,6 +171,27 @@ body.fade-out {
     .progress-container {
         width: 80%;
         bottom: 20px;
+    }
+    
+    /* 手机端传输通道发光效果使用垂直动画 */
+    .transfer-glow {
+        background: linear-gradient(180deg, 
+            transparent,
+            #4a9eff,
+            transparent
+        );
+        animation: transferGlowMobile 2s linear infinite;
+        left: 0;
+        top: -100%;
+    }
+    
+    /* 手机端能量粒子使用垂直动画 */
+    .energy-particle {
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(180deg, transparent, #fff, transparent);
+        transform-origin: center top;
+        animation: energyFlowMobile 2s linear infinite;
     }
     
     /* 手机端 .transfer-path 设置为垂直方向 */
@@ -254,13 +257,20 @@ body.fade-out {
         #4a9eff,
         transparent
     );
-    animation: transferGlow 2s linear infinite;
+    animation: transferGlowDesktop 2s linear infinite;
     opacity: 0;
 }
 
-@keyframes transferGlow {
+/* 电脑端发光动画 - 水平方向 */
+@keyframes transferGlowDesktop {
     0% { left: -100%; }
     100% { left: 100%; }
+}
+
+/* 移动端发光动画 - 垂直方向（从上往下） */
+@keyframes transferGlowMobile {
+    0% { top: -100%; }
+    100% { top: 100%; }
 }
 
 /* 能量流效果 */
@@ -271,16 +281,18 @@ body.fade-out {
     opacity: 0;
 }
 
+/* 电脑端能量粒子 - 水平方向 */
 .energy-particle {
     position: absolute;
     width: 20px;
     height: 4px;
     background: linear-gradient(90deg, transparent, #fff, transparent);
     transform-origin: left center;
-    animation: energyFlow 2s linear infinite;
+    animation: energyFlowDesktop 2s linear infinite;
 }
 
-@keyframes energyFlow {
+/* 电脑端能量流动画 - 从左到右 */
+@keyframes energyFlowDesktop {
     0% {
         left: 0;
         opacity: 0;
@@ -295,6 +307,27 @@ body.fade-out {
     }
     100% {
         left: 100%;
+        opacity: 0;
+        transform: rotate(720deg);
+    }
+}
+
+/* 移动端能量流动画 - 从上到下 */
+@keyframes energyFlowMobile {
+    0% {
+        top: 0;
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+        transform: rotate(720deg);
+    }
+    100% {
+        top: 100%;
         opacity: 0;
         transform: rotate(720deg);
     }
