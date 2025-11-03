@@ -305,6 +305,9 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    position: relative;
+    z-index: 100;
+    pointer-events: auto;
 }
 
 .share-button:hover {
@@ -316,3 +319,369 @@ body {
 .share-icon {
     font-size: 24px;
 }
+
+/* ==================== 分享卡片样式 ==================== */
+.share-card {
+    position: fixed;
+    left: -9999px;
+    top: 0;
+    width: 800px;
+    height: 1200px;
+    background: linear-gradient(135deg, #0B0B3B 0%, #1A1A4C 50%, #2D1B4E 100%);
+    display: none;
+    opacity: 0;
+    padding: 60px;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* 分享卡片背景效果 */
+.share-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.share-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(74, 158, 255, 0.03) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(74, 158, 255, 0.03) 2px, transparent 2px);
+    background-size: 40px 40px;
+}
+
+.share-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(0, 255, 255, 0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.particle:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation: particleFloat 3s infinite;
+}
+
+.particle:nth-child(2) {
+    top: 30%;
+    left: 80%;
+    animation: particleFloat 4s infinite 0.5s;
+}
+
+.particle:nth-child(3) {
+    top: 60%;
+    left: 15%;
+    animation: particleFloat 3.5s infinite 1s;
+}
+
+.particle:nth-child(4) {
+    top: 80%;
+    left: 70%;
+    animation: particleFloat 4.5s infinite 1.5s;
+}
+
+.particle:nth-child(5) {
+    top: 45%;
+    left: 50%;
+    animation: particleFloat 3.8s infinite 2s;
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-30px) scale(1.5);
+        opacity: 1;
+    }
+}
+
+/* 分享卡片头部 */
+.share-header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 50px;
+    z-index: 1;
+}
+
+.share-logo {
+    font-size: 80px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px rgba(0, 150, 255, 0.8));
+    animation: logoGlow 2s infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 20px rgba(0, 150, 255, 0.8));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 30px rgba(0, 255, 255, 1));
+    }
+}
+
+.share-title {
+    font-size: 42px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    letter-spacing: 2px;
+}
+
+/* 分享卡片内容 */
+.share-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* 头像区域 */
+.share-avatars {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.share-avatar-wrapper {
+    text-align: center;
+}
+
+.share-einstein,
+.share-user {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    object-fit: cover;
+    background: #fff;
+}
+
+.avatar-label {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #00ffff;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+/* 箭头动画 */
+.share-arrow {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 30px;
+}
+
+.arrow-line {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        rgba(0, 255, 255, 0.3) 0%, 
+        rgba(0, 255, 255, 0.8) 50%, 
+        rgba(0, 255, 255, 0.3) 100%);
+    position: relative;
+}
+
+.arrow-particles {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    transform: translateY(-50%);
+}
+
+.arrow-particles span {
+    font-size: 24px;
+    color: #00ffff;
+    animation: arrowParticleMove 1.5s infinite;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.arrow-particles span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.arrow-particles span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes arrowParticleMove {
+    0% {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+}
+
+.arrow-head {
+    position: absolute;
+    right: -10px;
+    font-size: 40px;
+    color: #00ffff;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    animation: arrowHeadPulse 1s infinite;
+}
+
+@keyframes arrowHeadPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* 信息区域 */
+.share-info {
+    background: rgba(0, 150, 255, 0.1);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 30px 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 22px;
+}
+
+.info-label {
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.info-value {
+    color: #fff;
+    font-weight: bold;
+    text-align: right;
+}
+
+/* 引言区域 */
+.share-quote {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 5px solid #00ffff;
+    padding: 30px 40px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+}
+
+.quote-mark {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(0, 255, 255, 0.3);
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.quote-text {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin: 0 0 15px 0;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+}
+
+.quote-author {
+    text-align: right;
+    color: #00ffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 徽章区域 */
+.share-badge {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.badge-icon {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    font-size: 60px;
+    color: #fff;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+    margin-bottom: 15px;
+    animation: badgeRotate 3s infinite;
+}
+
+@keyframes badgeRotate {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(360deg) scale(1.1);
+    }
+}
+
+.badge-text {
+    font-size: 28px;
+    color: #00ff00;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+}
+
+/* 页脚 */
+.share-footer {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    margin-top: 40px;
+}
+
+.footer-text {
+    font-size: 20px;
+    color: #fff;
+    background: rgba(0, 150, 255, 0.2);
+    padding: 20px 30px;
+    border-radius: 50px;
+    border: 2px solid rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    font-weight: bold;
+}
+ 
+ 

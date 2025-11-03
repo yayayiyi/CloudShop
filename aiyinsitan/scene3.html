@@ -44,11 +44,85 @@
             <p class="congrats">恭喜 <span id="userName"></span>！爱因斯坦的智慧已于 <span id="transferTime"></span> 成功注入你的大脑。</p>
         </div>
 
-        <button class="share-button">
+        <button class="share-button" id="shareBtn">
             <span class="share-icon">🔗</span>
             分享成果
         </button>
     </div>
+
+    <!-- 分享图片生成区域（隐藏） -->
+    <div class="share-card" id="shareCard">
+        <div class="share-card-bg">
+            <div class="share-grid"></div>
+            <div class="share-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+        
+        <div class="share-header">
+            <div class="share-logo">🧠</div>
+            <h2 class="share-title">爱因斯坦智慧传输证书</h2>
+        </div>
+
+        <div class="share-content">
+            <div class="share-avatars">
+                <div class="share-avatar-wrapper">
+                    <img src="images/einstein.png" alt="爱因斯坦" class="share-einstein">
+                    <div class="avatar-label">智慧源</div>
+                </div>
+                
+                <div class="share-arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-particles">
+                        <span>⚡</span>
+                        <span>⚡</span>
+                        <span>⚡</span>
+                    </div>
+                    <div class="arrow-head">➤</div>
+                </div>
+                
+                <div class="share-avatar-wrapper">
+                    <img src="images/user-avatar-complete.png" alt="用户" class="share-user">
+                    <div class="avatar-label">传输者</div>
+                </div>
+            </div>
+
+            <div class="share-info">
+                <div class="info-row">
+                    <span class="info-label">🎯 接收者：</span>
+                    <span class="info-value" id="shareUserName"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">⏰ 传输时间：</span>
+                    <span class="info-value" id="shareTime"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">💡 智慧等级：</span>
+                    <span class="info-value">MAX ⭐⭐⭐⭐⭐</span>
+                </div>
+            </div>
+
+            <div class="share-quote">
+                <div class="quote-mark">"</div>
+                <p class="quote-text">想象力比知识更重要，因为知识是有限的，而想象力概括着世界上的一切。</p>
+                <div class="quote-author">— 阿尔伯特·爱因斯坦</div>
+            </div>
+
+            <div class="share-badge">
+                <div class="badge-icon">✓</div>
+                <div class="badge-text">传输成功</div>
+            </div>
+        </div>
+
+        <div class="share-footer">
+            <div class="footer-text">🌟 恭喜您获得爱因斯坦的终极智慧！代码能力即将爆棚！</div>
+        </div>
+    </div>
+
     <script src="scene3.js"></script>
 </body>
 </html>
