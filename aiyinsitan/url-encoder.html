@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL 编码工具 - 爱因斯坦智慧传输</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .encode-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .encode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .copy-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .clear-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        .output-box {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 80px;
+            word-break: break-all;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .output-box.empty {
+            color: #999;
+            font-style: italic;
+        }
+
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .success-message.show {
+            opacity: 1;
+        }
+
+        .example {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .example h3 {
+            color: #856404;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .example p {
+            color: #856404;
+            font-size: 13px;
+            margin: 5px 0;
+            word-break: break-all;
+        }
+
+        .example strong {
+            color: #664d03;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .info-box h3 {
+            color: #1976D2;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            color: #0d47a1;
+        }
+
+        .info-box li {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 URL 编码工具</h1>
+        <p class="subtitle">将包含中文的URL转换为标准编码格式，确保链接可以正常分享</p>
+
+        <div class="input-group">
+            <label for="userName">👤 输入用户名（支持中文）：</label>
+            <input type="text" id="userName" placeholder="例如：湖滨" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="originalUrl">🔗 或者直接粘贴完整的URL（包含中文）：</label>
+            <textarea id="originalUrl" placeholder="例如：file:///C:/CloudShop/aiyinsitan/index.html?name=湖滨"></textarea>
+        </div>
+
+        <div class="button-group">
+            <button class="encode-btn" onclick="encodeUrl()">🔄 生成编码后的URL</button>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()" disabled>📋 复制URL</button>
+            <button class="clear-btn" onclick="clearAll()">🗑️ 清空</button>
+        </div>
+
+        <div class="input-group">
+            <label>✅ 编码后的URL（可直接复制使用）：</label>
+            <div class="output-box empty" id="output">编码后的URL将显示在这里...</div>
+        </div>
+
+        <div class="success-message" id="successMsg">✅ 已复制到剪贴板！</div>
+
+        <div class="example">
+            <h3>📌 使用示例：</h3>
+            <p><strong>原始URL：</strong> file:///C:/CloudShop/aiyinsitan/index.html?name=湖滨</p>
+            <p><strong>编码后：</strong> file:///C:/CloudShop/aiyinsitan/index.html?name=%E6%B9%96%E6%BB%A8</p>
+        </div>
+
+        <div class="info-box">
+            <h3>💡 使用说明：</h3>
+            <ul>
+                <li>方法1：直接输入用户名，工具会自动生成完整的编码URL</li>
+                <li>方法2：粘贴包含中文的完整URL，工具会自动识别并编码中文部分</li>
+                <li>编码后的URL可以直接复制分享给他人使用</li>
+                <li>建议使用 http:// 或 https:// 协议的URL（file:// 在某些浏览器中可能受限）</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 获取当前页面的基础URL（自动检测）
+        function getBaseUrl() {
+            // 获取当前页面的目录路径
+            const currentPath = window.location.href;
+            const lastSlash = currentPath.lastIndexOf('/');
+            const basePath = currentPath.substring(0, lastSlash + 1);
+            return basePath + 'index.html';
+        }
+
+        // 编码URL
+        function encodeUrl() {
+            const userName = document.getElementById('userName').value.trim();
+            const originalUrl = document.getElementById('originalUrl').value.trim();
+            const output = document.getElementById('output');
+            const copyBtn = document.getElementById('copyBtn');
+
+            let encodedUrl = '';
+
+            if (originalUrl) {
+                // 处理完整URL
+                try {
+                    const url = new URL(originalUrl);
+                    const params = new URLSearchParams(url.search);
+                    
+                    // 重新构建URL，确保所有参数都被正确编码
+                    const newParams = new URLSearchParams();
+                    for (const [key, value] of params.entries()) {
+                        newParams.set(key, value);
+                    }
+                    
+                    encodedUrl = url.origin + url.pathname + '?' + newParams.toString();
+                } catch (e) {
+                    // 如果不是标准URL格式，尝试处理file://协议
+                    if (originalUrl.includes('?')) {
+                        const [baseUrl, queryString] = originalUrl.split('?');
+                        const params = new URLSearchParams(queryString);
+                        const newParams = new URLSearchParams();
+                        
+                        for (const [key, value] of params.entries()) {
+                            newParams.set(key, value);
+                        }
+                        
+                        encodedUrl = baseUrl + '?' + newParams.toString();
+                    } else {
+                        output.textContent = '❌ URL格式不正确，请检查输入';
+                        output.classList.add('empty');
+                        copyBtn.disabled = true;
+                        return;
+                    }
+                }
+            } else if (userName) {
+                // 只输入了用户名，生成完整URL
+                const baseUrl = getBaseUrl();
+                encodedUrl = baseUrl + '?name=' + encodeURIComponent(userName);
+            } else {
+                output.textContent = '⚠️ 请输入用户名或完整URL';
+                output.classList.add('empty');
+                copyBtn.disabled = true;
+                return;
+            }
+
+            // 显示编码后的URL
+            output.textContent = encodedUrl;
+            output.classList.remove('empty');
+            copyBtn.disabled = false;
+        }
+
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            const text = output.textContent;
+            
+            if (text && !output.classList.contains('empty')) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const successMsg = document.getElementById('successMsg');
+                    successMsg.classList.add('show');
+                    
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                    }, 2000);
+                }).catch(err => {
+                    // 备用复制方法
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    
+                    const successMsg = document.getElementById('successMsg');
+                    successMsg.classList.add('show');
+                    
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                    }, 2000);
+                });
+            }
+        }
+
+        // 清空所有输入
+        function clearAll() {
+            document.getElementById('userName').value = '';
+            document.getElementById('originalUrl').value = '';
+            document.getElementById('output').textContent = '编码后的URL将显示在这里...';
+            document.getElementById('output').classList.add('empty');
+            document.getElementById('copyBtn').disabled = true;
+        }
+
+        // 自动检测输入并编码
+        document.getElementById('userName').addEventListener('input', () => {
+            if (document.getElementById('userName').value.trim()) {
+                document.getElementById('originalUrl').value = '';
+            }
+        });
+
+        document.getElementById('originalUrl').addEventListener('input', () => {
+            if (document.getElementById('originalUrl').value.trim()) {
+                document.getElementById('userName').value = '';
+            }
+        });
+
+        // 支持Enter键快速编码
+        document.getElementById('userName').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                encodeUrl();
+            }
+        });
+
+        // 自动检测URL中的name参数并填充
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            if (name) {
+                document.getElementById('userName').value = name;
+                encodeUrl();
+            }
+        });
+    </script>
+</body>
+</html>
